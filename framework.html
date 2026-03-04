@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Framework — The Canon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --dark: #1a1410;
+    --ink: #2c2318;
+    --gold: #b8914a;
+    --gold-light: #d4a96a;
+    --red: #8b2020;
+    --muted: #7a6e5f;
+    --border: rgba(184,145,74,0.25);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(184,145,74,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(139,32,32,0.04) 0%, transparent 60%);
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  nav a {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 18px 32px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  nav a:hover { color: var(--ink); }
+  nav a.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 70px 20px 60px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  header::before {
+    content:''; display:block;
+    width:1px; height:40px;
+    background:var(--gold);
+    margin:0 auto 28px; opacity:0.5;
+  }
+  .eyebrow { font-size:10px; letter-spacing:0.4em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+  h1 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(40px,6vw,72px);
+    font-weight:300;
+    line-height:1;
+    color:var(--dark);
+    letter-spacing:-0.02em;
+  }
+  h1 em { font-style:italic; color:var(--gold); }
+  .header-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--muted);
+    margin-top: 16px;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  /* CONTENT */
+  .content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 80px 32px 120px;
+  }
+
+  /* INTRO BLOCK */
+  .intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    line-height: 1.75;
+    color: var(--ink);
+    margin-bottom: 72px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .intro p + p { margin-top: 1.4em; }
+  .intro strong {
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  /* SECTION TITLES */
+  .block { margin-bottom: 72px; }
+  .block-label {
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .block-label::after {
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--border);
+  }
+  .block h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 300;
+    color: var(--dark);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+  .block h2 em { font-style:italic; color:var(--gold); }
+  .block p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+  .block p + p { margin-top: 1.2em; }
+
+  /* TIER CARDS */
+  .tiers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+    margin-top: 36px;
+  }
+  .tier-card {
+    background: rgba(255,255,255,0.5);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .tier-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    opacity: 0.6;
+  }
+  .tier-body {}
+  .tier-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+  .tier-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .tier-example {
+    margin-top: 10px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .tier-example span {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* QUALIFIERS GRID */
+  .qualifiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2px;
+    margin-top: 36px;
+  }
+  .qualifier-card {
+    background: rgba(255,255,255,0.5);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+  }
+  .qualifier-icon {
+    font-size: 20px;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .qualifier-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+  .qualifier-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  /* SECTIONS TABLE */
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2px;
+    margin-top: 36px;
+  }
+  .section-card {
+    background: rgba(255,255,255,0.5);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+  }
+  .section-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .section-card-desc {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* SPECIAL FLAGS */
+  .flag-block {
+    display: flex;
+    gap: 32px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+  .flag-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    flex: 1;
+    min-width: 240px;
+  }
+  .flag-emoji { font-size: 24px; flex-shrink: 0; }
+  .flag-body {}
+  .flag-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .flag-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* CTA */
+  .cta {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 60px;
+    border-top: 1px solid var(--border);
+  }
+  .cta p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .cta a {
+    display: inline-block;
+    background: var(--dark);
+    color: var(--gold-light);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cta a:hover { background: #2e241c; }
+
+  @media(max-width:600px) {
+    .tier-card { grid-template-columns: 1fr; }
+    .tier-number { font-size: 32px; }
+    .content { padding: 48px 20px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="cinephile-watchlist.html">The List</a>
+  <a href="framework.html" class="active">The Framework</a>
+</nav>
+
+<header>
+  <p class="eyebrow">Behind the Curation</p>
+  <h1>The <em>Framework</em></h1>
+  <p class="header-sub">How we decided which films belong — and why the canon looks the way it does.</p>
+</header>
+
+<div class="content">
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>A list of "great films" is only as useful as the thinking behind it. Anyone can copy the top 100 from a poll. What we've tried to build here is something more deliberate: a map of cinema's full range, from the first silent experiments to the blockbusters that rewired popular culture — organized around a clear set of principles.</p>
+    <p>This page explains those principles. What earns a film a place on the list. How we think about difficulty and accessibility. Why certain categories exist. And what we mean by a cinephile's education, as distinct from a simple best-of ranking.</p>
+    <p><strong>The goal is not comprehensiveness for its own sake.</strong> It's to give any serious viewer — whether they're just starting out or filling the gaps in a lifetime of watching — a coherent path through the medium's history and possibilities.</p>
+  </div>
+
+  <!-- TIER SYSTEM -->
+  <div class="block">
+    <div class="block-label">The Tiered Approach</div>
+    <h2>Three <em>tiers</em> of inclusion</h2>
+    <p>Rather than a binary in-or-out decision, films are considered against a tiered framework. A film needs to clear only one bar in Tier 1 to belong. Tier 2 and Tier 3 entries require a stronger cumulative case.</p>
+
+    <div class="tiers">
+      <div class="tier-card">
+        <div class="tier-number">I</div>
+        <div class="tier-body">
+          <div class="tier-title">Must-Include — any single qualifier</div>
+          <div class="tier-desc">A film earns automatic inclusion if it appears in the top 50 of the Sight & Sound all-time poll, was directed by a filmmaker with undisputed master-level standing, or demonstrably changed the language of cinema itself. One qualifier is enough.</div>
+          <div class="tier-example">Examples: <span>Tokyo Story, Citizen Kane, Breathless, The Passion of Joan of Arc</span></div>
+        </div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-number">II</div>
+        <div class="tier-body">
+          <div class="tier-title">Include — two or more qualifiers</div>
+          <div class="tier-desc">Films that appear on major critical lists, represent an essential genre or national cinema, won the Palme d'Or or an equivalent festival prize, or define a significant movement. Two of these five criteria earns a place.</div>
+          <div class="tier-example">Examples: <span>Parasite, A Separation, The Wild Bunch, Chinatown</span></div>
+        </div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-number">III</div>
+        <div class="tier-body">
+          <div class="tier-title">Deep Cuts — earned by context</div>
+          <div class="tier-desc">Films a serious cinephile would know and value even without clearing the above bars. This tier allows for films with personal or cultural resonance — including the French cinema given particular weight here — and for the "Culture Definers" that shaped the broader landscape of film.</div>
+          <div class="tier-example">Examples: <span>La Haine, Diva, Indiana Jones, Die Hard, Touki Bouki</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUALIFIERS -->
+  <div class="block">
+    <div class="block-label">The Qualifiers</div>
+    <h2>What gets a film <em>considered</em></h2>
+    <p>These are the criteria a film is measured against. No single one is automatically disqualifying or automatically sufficient — they are weighed together.</p>
+
+    <div class="qualifiers">
+      <div class="qualifier-card">
+        <span class="qualifier-icon">📋</span>
+        <div class="qualifier-title">Critical List Consensus</div>
+        <div class="qualifier-desc">Appears on three or more of the major canonical lists: Sight & Sound, AFI Top 100, Cahiers du Cinéma, Roger Ebert's Great Movies, or the They Shoot Pictures Don't They poll.</div>
+      </div>
+      <div class="qualifier-card">
+        <span class="qualifier-icon">🎬</span>
+        <div class="qualifier-title">Master Director</div>
+        <div class="qualifier-desc">Made by a filmmaker whose body of work is considered foundational to the medium — Bergman, Kubrick, Kurosawa, Fellini, Tarkovsky, Godard, Ozu, and their peers.</div>
+      </div>
+      <div class="qualifier-card">
+        <span class="qualifier-icon">⚙️</span>
+        <div class="qualifier-title">Technical or Formal Innovation</div>
+        <div class="qualifier-desc">Introduced a technique, approach, or formal idea that changed how films were made. Citizen Kane's deep focus. Breathless's jump cuts. Man with a Movie Camera's montage theory.</div>
+      </div>
+      <div class="qualifier-card">
+        <span class="qualifier-icon">🏆</span>
+        <div class="qualifier-title">Major Festival Recognition</div>
+        <div class="qualifier-desc">Won the Palme d'Or at Cannes, the Golden Lion at Venice, the Golden Bear at Berlin, or the Academy Award for Best Picture — particularly where this recognition proved durable over time.</div>
+      </div>
+      <div class="qualifier-card">
+        <span class="qualifier-icon">🗺️</span>
+        <div class="qualifier-title">National Cinema Representation</div>
+        <div class="qualifier-desc">Stands as the essential or defining work of a national film tradition that would otherwise be absent — Iranian cinema, Senegalese cinema, Taiwanese New Wave, Indian parallel cinema.</div>
+      </div>
+      <div class="qualifier-card">
+        <span class="qualifier-icon">🌍</span>
+        <div class="qualifier-title">Cultural Impact</div>
+        <div class="qualifier-desc">Shaped popular culture, audience expectations, or the business of cinema in a way that any educated viewer needs to understand — even if the film itself is not an "art" film by conventional standards.</div>
+      </div>
+      <div class="qualifier-card">
+        <span class="qualifier-icon">🎭</span>
+        <div class="qualifier-title">Genre Definition</div>
+        <div class="qualifier-desc">Represents the apex or the origin point of a genre — the western, the horror film, the noir, the science fiction epic — in a way that subsequent films in that genre consciously respond to.</div>
+      </div>
+      <div class="qualifier-card">
+        <span class="qualifier-icon">⏳</span>
+        <div class="qualifier-title">Proven Durability</div>
+        <div class="qualifier-desc">Films are generally given time to establish their reputation before inclusion. Very recent films are held to a higher bar — their presence on the list reflects unusually rapid and broad critical consensus.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="block">
+    <div class="block-label">The Sections</div>
+    <h2>How the list is <em>organized</em></h2>
+    <p>Films are grouped into sections that reflect either a historical period, a national tradition, a movement, or a genre. The goal is to give each viewing context — to suggest that <em>Tokyo Story</em> belongs in conversation with Mizoguchi and Kurosawa, not simply in a list of "old foreign films."</p>
+
+    <div class="sections-grid">
+      <div class="section-card">
+        <div class="section-card-title">The Silent Era</div>
+        <div class="section-card-desc">1910s–1930s · Chaplin, Keaton, Murnau, Eisenstein, Dreyer, Lang</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">Hollywood Golden Age</div>
+        <div class="section-card-desc">1930s–1950s · Hitchcock, Wilder, Welles, Ford, Kazan</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">American New Wave & the '70s</div>
+        <div class="section-card-desc">1967–1980 · Coppola, Scorsese, Altman, Lumet, Malick</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">Epic & Prestige</div>
+        <div class="section-card-desc">Scale, duration, and moral weight · Lean, Kubrick, Spielberg, Tarkovsky</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">La Nouvelle Vague</div>
+        <div class="section-card-desc">French New Wave · Godard, Truffaut, Varda, Rohmer, Resnais</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">French Cinema — Beyond the Wave</div>
+        <div class="section-card-desc">Renoir through Sciamma · Tati, Demy, Kieślowski, Audiard</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">European Art Cinema</div>
+        <div class="section-card-desc">Bergman, Fellini, Antonioni, Pasolini, Haneke, Akerman</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">Soviet & Eastern European</div>
+        <div class="section-card-desc">Tarkovsky, Klimov, Kieślowski, Béla Tarr, Eisenstein</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">Japanese Cinema</div>
+        <div class="section-card-desc">Kurosawa, Ozu, Mizoguchi, Kobayashi, Miyazaki, Takahata</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">World Cinema — Asia</div>
+        <div class="section-card-desc">Satyajit Ray, Kiarostami, Wong Kar-wai, Edward Yang, Bong Joon-ho</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">World Cinema — Latin America & Africa</div>
+        <div class="section-card-desc">Sembène, Iñárritu, Cuarón, Mambéty, Salles</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">The Western</div>
+        <div class="section-card-desc">Ford, Leone, Peckinpah, Eastwood · America's native mythology</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">Horror</div>
+        <div class="section-card-desc">From Hitchcock and Polanski to Aster and Peele</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">Noir & Crime</div>
+        <div class="section-card-desc">Classic noir through neo-noir · Huston, Scorsese, Coen Brothers, Mann</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">Science Fiction</div>
+        <div class="section-card-desc">Kubrick, Scott, Tarkovsky, Gilliam, Villeneuve</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">Modern American Classics</div>
+        <div class="section-card-desc">1980s–present · PTA, Lynch, Coens, Tarantino, Malick, Jenkins</div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-title">Culture Definers</div>
+        <div class="section-card-desc">Films that shaped the audience · Spielberg, Cameron, Lucas, Nolan</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECIAL FLAGS -->
+  <div class="block">
+    <div class="block-label">Special Designations</div>
+    <h2>Films that need a <em>warning label</em></h2>
+    <p>Some films on this list are formally or emotionally demanding in ways that set them apart. We flag these not to discourage viewing, but to calibrate expectations. A viewer who sits down expecting a conventional narrative experience and encounters <em>Sátántangó</em> unprepared is a viewer who may not give the film the attention it deserves.</p>
+
+    <div class="flag-block">
+      <div class="flag-item">
+        <span class="flag-emoji">💀</span>
+        <div class="flag-body">
+          <div class="flag-title">Demanding Watch</div>
+          <div class="flag-desc">Long running times (3+ hours), unconventional narrative structures, deliberately slow pacing, or subject matter of unusual intensity. These films reward patience and preparation. Examples: <em>Sátántangó</em> (7h 18m), <em>Jeanne Dielman</em> (3h 21m), <em>Come and See</em>, <em>Andrei Rublev</em>, the Tarkovsky trilogy of <em>Stalker</em>, <em>Solaris</em>, and <em>The Mirror</em>.</div>
+        </div>
+      </div>
+      <div class="flag-item">
+        <span class="flag-emoji">🇫🇷</span>
+        <div class="flag-body">
+          <div class="flag-title">French Cinema</div>
+          <div class="flag-desc">French film receives deeper coverage than other national cinemas, spanning from Renoir's pre-war masterpieces through the Nouvelle Vague to contemporary auteurs. This reflects both the outsized influence of French cinema on the medium globally, and a particular personal affinity for the tradition.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A NOTE ON CULTURE DEFINERS -->
+  <div class="block">
+    <div class="block-label">A Note on Culture Definers</div>
+    <h2>Why <em>Jaws</em> belongs here</h2>
+    <p>A cinephile's education that ignores popular cinema is an incomplete one. Films like <em>Jaws</em>, <em>Star Wars</em>, <em>The Terminator</em>, and <em>The Dark Knight</em> are not on this list despite being blockbusters — they're here because of what they did to the medium and to audiences.</p>
+    <p><em>Jaws</em> invented the summer blockbuster and permanently altered Hollywood's release strategy. <em>Star Wars</em> redefined what special effects could do and created the template for franchise cinema. <em>The Dark Knight</em> proved that superhero films could sustain genuine moral complexity. These films changed the conditions under which all other films get made and seen. That's canonical by any reasonable definition.</p>
+    <p>The Culture Definers section makes no claim that these films are formally equivalent to <em>Tokyo Story</em> or <em>Jeanne Dielman</em>. It claims that understanding cinema means understanding what these films are and what they did.</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <p>Ready to start watching?</p>
+    <a href="cinephile-watchlist.html">Browse the full list →</a>
+  </div>
+
+</div>
+</body>
+</html>
