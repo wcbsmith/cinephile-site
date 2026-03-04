@@ -5,53 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Framework — The Canon</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 <style>
-  :root {
-    --cream: #f5f0e8;
-    --dark: #1a1410;
-    --ink: #2c2318;
-    --gold: #b8914a;
-    --gold-light: #d4a96a;
-    --red: #8b2020;
-    --muted: #7a6e5f;
-    --border: rgba(184,145,74,0.25);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background-color: var(--cream);
-    color: var(--ink);
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 300;
-    min-height: 100vh;
-    background-image:
-      radial-gradient(ellipse at 20% 0%, rgba(184,145,74,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 100%, rgba(139,32,32,0.04) 0%, transparent 60%);
-  }
-
-  /* NAV */
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    border-bottom: 1px solid var(--border);
-    background: var(--cream);
-    position: sticky;
-    top: 0;
-    z-index: 50;
-  }
-  nav a {
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    padding: 18px 32px;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s;
-  }
-  nav a:hover { color: var(--ink); }
-  nav a.active { color: var(--gold); border-bottom-color: var(--gold); }
-
   /* HEADER */
   header {
     text-align: center;
@@ -74,7 +29,6 @@
     color:var(--dark);
     letter-spacing:-0.02em;
   }
-  h1 em { font-style:italic; color:var(--gold); }
   .header-sub {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
@@ -328,7 +282,7 @@
 <body>
 
 <nav>
-  <a href="cinephile-watchlist.html">The List</a>
+  <a href="index.html">The List</a>
   <a href="framework.html" class="active">The Framework</a>
 </nav>
 
